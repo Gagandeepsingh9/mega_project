@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+  namespace: mega_app
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration_db
+        image: trainwithshubham/easyshop-migration:1
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: app-configmap
+

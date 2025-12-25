@@ -1,0 +1,54 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: app_deployment
+  namespace: mega_app
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mega
+  template:
+    metadata:
+      name: app_pod
+      labels:
+        app: mega
+    spec:
+      containers:
+        - name: mega_app
+          image: mrsinghdocker/mega_app
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 3000
+          envFrom:
+          - configMapRef:
+              name: app-configmap
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          startupProbe:
+            httpGet:
+              path: /
+              port: 3000
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 25
+            periodSeconds: 20
+
+
