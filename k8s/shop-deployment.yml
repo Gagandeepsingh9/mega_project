@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: mega_app
-          image: mrsinghdocker/mega_app
+          image: mrsinghdocker/mega_app:10
           imagePullPolicy: Always
           ports:
           - containerPort: 3000
