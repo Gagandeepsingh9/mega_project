@@ -9,7 +9,6 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 
 spec:
-  ingressClassName: 
   rules:
   - http:
       paths:
