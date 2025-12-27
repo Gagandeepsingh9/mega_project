@@ -4,8 +4,10 @@ metadata:
   name: db-migration
   namespace: mega_app
 spec:
+  backoffLimit: 3
   template:
     spec:
+      restartPolicy: OnFailure
       containers:
       - name: migration_db
         image: trainwithshubham/easyshop-migration:1

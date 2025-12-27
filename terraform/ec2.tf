@@ -1,16 +1,12 @@
 resource "aws_key_pair" "my_key" {
-    key_name = "My-Mega-key"
+    key_name = "jenkins-key"
     public_key = file("${path.module}/keys/mega_key.pub")
 }
 
-resource "aws_default_vpc" "my_vpc" {
-  
-}
-
 resource "aws_security_group" "my_sg" {
-  name        = "My-Mega-sg"
+  name        = "jenkins-sg"
   description = "Allow ssh & http"
-  vpc_id      = aws_default_vpc.my_vpc.id
+  vpc_id      = module.vpc.vpc_id
 
   tags = {
     Name = "allow-ssh-${var.my_env}"
@@ -60,6 +56,7 @@ resource "aws_instance" "my_instance" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "m7i-flex.large"
   key_name = aws_key_pair.my_key.key_name
+  subnet_id = module.vpc.public_subnets[0]
   security_groups = [aws_security_group.my_sg.name]
   root_block_device {
     volume_size = var.my_env == "prd" ? 15 : 10
@@ -68,7 +65,7 @@ resource "aws_instance" "my_instance" {
   user_data = file("${path.module}/install_tools.sh")
 
   tags = {
-    Name = "my_mega_instance"
+    Name = "Jenkins_CI_instance"
     Environment = var.my_env
   }
 }
