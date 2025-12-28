@@ -15,7 +15,8 @@ spec:
       - shop.mrsinghincloud.com     # CHANGE THIS to your actual domain
     secretName: shop-tls-secret
   rules:
-  - http:
+  - host: shop.mrsinghincloud.com
+    http:
       paths:
       - path: /
         pathType: Prefix
