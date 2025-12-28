@@ -4,7 +4,7 @@ metadata:
   name: shop-svc
   namespace: mega-app
 spec:
-  type: clusterIP
+  type: ClusterIP
   ports:
   - port: 80
     targetPort: 3000
