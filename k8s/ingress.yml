@@ -8,9 +8,6 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_intercept_errors on;
-      error_page 404 =200 /index.html;
 
 spec:
   tls:
