@@ -3,7 +3,7 @@ apiVersion: apps/v1
 
 metadata:
   name: app_deployment
-  namespace: mega_app
+  namespace: mega-app
 
 spec:
   replicas: 2
@@ -12,12 +12,12 @@ spec:
       app: mega
   template:
     metadata:
-      name: app_pod
+      name: app-pod
       labels:
         app: mega
     spec:
       containers:
-        - name: mega_app
+        - name: mega-app
           image: mrsinghdocker/mega_app:10
           imagePullPolicy: Always
           ports:
