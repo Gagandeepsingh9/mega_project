@@ -2,7 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 
 metadata:
-  name: app_deployment
+  name: app-deployment
   namespace: mega-app
 
 spec:
