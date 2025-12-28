@@ -45,12 +45,7 @@ spec:
         volumeMounts:
         - name: vault
           mountPath: /data/db
-  volumeClaimTemplates:
-  - metadata:
-      name: vault
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "my-storage-class"
-      resources:
-        requests:
-          storage: 1Gi
+      volumes:
+        - name: vault
+          persistentVolumeClaim:
+            claimName: mongodb-pvc
