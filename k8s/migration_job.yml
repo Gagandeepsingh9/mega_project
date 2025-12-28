@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: db-migration
-  namespace: mega_app
+  namespace: mega-app
 spec:
   backoffLimit: 3
   template:
