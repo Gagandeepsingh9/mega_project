@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mongo-svc
-  namespace: mega_app
+  namespace: mega-app
   labels:
     app: mongodb
 spec:
@@ -19,7 +19,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mongodb-statefulset
-  namespace: mega_app
+  namespace: mega-app
 spec:
   selector:
     matchLabels:
@@ -45,12 +45,7 @@ spec:
         volumeMounts:
         - name: vault
           mountPath: /data/db
-  volumeClaimTemplates:
-  - metadata:
-      name: vault
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "my-storage-class"
-      resources:
-        requests:
-          storage: 1Gi
+      volumes:
+        - name: vault
+          persistentVolumeClaim:
+            claimName: mongodb-pvc

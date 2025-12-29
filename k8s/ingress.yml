@@ -3,14 +3,20 @@ apiVersion: networking.k8s.io/v1
 
 metadata:
   name: shop-ingress
-  namespace: mega_app
+  namespace: mega-app
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
     kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 
 spec:
+  tls:
+  - hosts:
+      - shop.mrsinghincloud.com     # CHANGE THIS to your actual domain
+    secretName: shop-tls-secret
   rules:
-  - http:
+  - host: shop.mrsinghincloud.com
+    http:
       paths:
       - path: /
         pathType: Prefix
