@@ -57,7 +57,7 @@ resource "aws_instance" "my_instance" {
   instance_type = "m7i-flex.large"
   key_name = aws_key_pair.my_key.key_name
   subnet_id = module.vpc.public_subnets[0]
-  security_groups = [aws_security_group.my_sg.name]
+  vpc_security_group_ids = [aws_security_group.my_sg.id]
   root_block_device {
     volume_size = var.my_env == "prd" ? 15 : 10
     volume_type = "gp3"
