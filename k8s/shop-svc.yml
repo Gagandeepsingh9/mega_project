@@ -2,9 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: shop-svc
-  namespace: mega_app
+  namespace: mega-app
 spec:
-  type: clusterIP
+  type: ClusterIP
   ports:
   - port: 80
     targetPort: 3000
